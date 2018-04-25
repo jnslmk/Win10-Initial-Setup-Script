@@ -147,6 +147,9 @@ $tweaks = @(
 	# "UnpinStartMenuTiles",
 	# "UnpinTaskbarIcons",
 
+	### Package installation ###
+	"InstallChocolatey",
+
 	### Auxiliary Functions ###
 	"WaitForKey",
 	"Restart"
@@ -2275,6 +2278,24 @@ Function UnpinTaskbarIcons {
 	Write-Output "Unpinning all Taskbar icons..."
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" -Name "Favorites" -Type Binary -Value ([byte[]](0xFF))
 	Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" -Name "FavoritesResolve" -ErrorAction SilentlyContinue
+}
+
+
+
+##########
+# Package installation
+##########
+
+# Install chocolatey package manager and packages specified by packages.config
+Function InstallChocolatey {
+    Write-Host "Installing chocolatey..."
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    Write-Host "Installing chocolatey packages..."
+	# Always confirm package installation with chocolatey
+    choco feature enable -n allowGlobalConfirmation
+    $scriptDirectory = Split-Path $script:MyInvocation.MyCommand.Path
+    $packageConfigPath = Join-Path $scriptDirectory "packages.config"
+    choco install $packageConfigPath
 }
 
 
