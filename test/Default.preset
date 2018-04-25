@@ -131,5 +131,7 @@ RemoveFaxPrinter
 # UnpinStartMenuTiles
 # UnpinTaskbarIcons
 
+InstallChocolatey
+
 WaitForKey
 Restart
