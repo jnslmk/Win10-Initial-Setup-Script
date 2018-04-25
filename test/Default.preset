@@ -4,7 +4,7 @@ RequireAdmin
 
 DisableTelemetry
 DisableWiFiSense
-# DisableSmartScreen
+DisableSmartScreen
 DisableWebSearch
 DisableAppSuggestions
 DisableBackgroundApps
@@ -20,14 +20,14 @@ DisableAutoLogger
 DisableDiagTrack
 DisableWAPPush
 
-# SetUACLow
-# EnableSharingMappedDrives
+SetUACLow
+DisableSharingMappedDrives
 DisableAdminShares
-# DisableSMB1
+DisableSMB1
 SetCurrentNetworkPrivate
 # SetUnknownNetworksPrivate
-# DisableNetDevicesAutoInst
-# EnableCtrldFolderAccess
+DisableNetDevicesAutoInst
+DisableCtrldFolderAccess
 # DisableFirewall
 # DisableDefender
 # DisableDefenderCloud
@@ -43,18 +43,18 @@ DisableUpdateRestart
 DisableHomeGroups
 DisableSharedExperiences
 DisableRemoteAssistance
-EnableRemoteDesktop
+# EnableRemoteDesktop
 DisableAutoplay
 DisableAutorun
-# EnableStorageSense
-# DisableDefragmentation
-# DisableSuperfetch
-# DisableIndexing
+EnableStorageSense
+DisableDefragmentation
+DisableSuperfetch
+DisableIndexing
 # SetBIOSTimeUTC
-# EnableHibernation
+EnableHibernation
 # DisableSleepButton
 # DisableSleepTimeout
-# DisableFastStartup
+EnableFastStartup
 
 DisableActionCenter
 DisableLockScreen
@@ -74,49 +74,49 @@ ShowTrayIcons
 DisableSearchAppInStore
 DisableNewAppPrompt
 # SetControlPanelViewIcons
-SetVisualFXPerformance
-# AddENKeyboard
-# AddESKeyboard	   
-# EnableNumlock
+SetVisualFXAppearance
+AddENKeyboard
+AddESKeyboard	   
+EnableNumlock
 
 ShowKnownExtensions
 ShowHiddenFiles
 HideSyncNotifications
 HideRecentShortcuts
 SetExplorerThisPC
-ShowThisPCOnDesktop
-# ShowUserFolderOnDesktop
+HideThisPCOnDesktop
+HideUserFolderOnDesktop
 HideDesktopFromThisPC
 # HideDesktopFromExplorer
 HideDocumentsFromThisPC
-# HideDocumentsFromExplorer
-HideDownloadsFromThisPC
+HideDocumentsFromExplorer
+# HideDownloadsFromThisPC
 # HideDownloadsFromExplorer
 HideMusicFromThisPC
-# HideMusicFromExplorer
+HideMusicFromExplorer
 HidePicturesFromThisPC
-# HidePicturesFromExplorer
+HidePicturesFromExplorer
 HideVideosFromThisPC
-# HideVideosFromExplorer
+HideVideosFromExplorer
 Hide3DObjectsFromThisPC
-# Hide3DObjectsFromExplorer
+Hide3DObjectsFromExplorer
 # DisableThumbnails
 DisableThumbsDB
 
-DisableOneDrive
-UninstallOneDrive
+# DisableOneDrive
+# UninstallOneDrive
 UninstallMsftBloat
 UninstallThirdPartyBloat
 # UninstallWindowsStore
 DisableXboxFeatures
 DisableAdobeFlash
-# UninstallMediaPlayer
+UninstallMediaPlayer
 # UninstallInternetExplorer
 # UninstallWorkFolders
-# InstallLinuxSubsystem
+InstallLinuxSubsystem
 # InstallHyperV
-SetPhotoViewerAssociation
-AddPhotoViewerOpenWith
+# SetPhotoViewerAssociation
+# AddPhotoViewerOpenWith
 # UninstallPDFPrinter
 UninstallXPSPrinter
 RemoveFaxPrinter
