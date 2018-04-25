@@ -66,6 +66,7 @@ $tweaks = @(
 	# "DisableSleepButton",         # "EnableSleepButton",
 	# "DisableSleepTimeout",        # "EnableSleepTimeout",
 	# "DisableFastStartup",         # "EnableFastStartup",
+	"DisableExtraServices",
 
 	### UI Tweaks ###
 	"DisableActionCenter",          # "EnableActionCenter",
@@ -155,7 +156,72 @@ $tweaks = @(
 	"Restart"
 )
 
-
+# Services to disable when calling DisableExtraServices
+# Find out what indivual services are about at www.servicedefaults.com or http://www.blackviper.com/service-configurations/black-vipers-windows-10-service-configurations/
+$services = @(
+    ("AJRouter", "Disabled"),                                 # AllJoyn Router Service
+    ("ALG", "Disabled"),                                      # Application Layer Gateway Service
+    ("BthHFSrv", "Disabled"),                                 # Bluetooth Handsfree Service
+    ("bthserv", "Disabled"),                                  # Bluetooth Support Service
+    ("CertPropSvc", "Disabled"),                              # Certificate Propagation
+    ("dmwappushsvc", "Disabled"),                             # dmwappushsvc
+    ("iphlpsvc", "Disabled"),                                 # IP Helper
+    ("IpxlatCfgSvc", "Disabled"),                             # IP Translation Configuration Service
+    ("MSiSCSI", "Disabled"),                                  # Microsoft iSCSI Initiator Service
+    ("NaturalAuthentication", "Disabled"),                    # Natural Authentication (Silly bio-metrics or face recognition login)
+    ("Netlogon", "Disabled"),                                 # Used only with a domain controlled environment
+    ("NcdAutoSetup", "Disabled"),                             # Network Connected Devices Auto-Setup
+    ("SessionEnv", "Disabled"),                               # Remote Desktop Configuration
+    ("TermService", "Disabled"),                              # Remote Desktop Services
+    ("UmRdpService", "Disabled"),                             # Remote Desktop Services UserMode Port Redirector
+    ("wcncsvc", "Disabled"),                                  # Used for WPS connection
+    ("WinRM", "Disabled"),                                    # Windows Remote Management (WS-Management)
+    ("diagnosticshub.standardcollector.service", "Disabled"), # Microsoft (R) Diagnostics Hub Standard Collector Service
+    ("MapsBroker", "Disabled"),                               # Downloaded Maps Manager
+    ("NetTcpPortSharing", "Disabled"),                        # Net.Tcp Port Sharing Service
+    ("WbioSrvc", "Disabled"),                                 # Windows Biometric Service
+    ("WMPNetworkSvc", "Disabled"),                            # Windows Media Player Network Sharing Service
+    ("AppVClient", "Disabled"),                               # Provide virtual apps to employees
+    ("RemoteRegistry", "Disabled"),                           # Remote registry access
+    ("CDPSvc", "Disabled"),                                   # Connected Devices Platform Service
+    ("shpamsvc", "Disabled"),                                 # Shared PC Account Manager
+    ("SCardSvr", "Manual"),                                   # Smart Card Ressource Management Server
+    ("UevAgentService", "Disabled"),                          # User Experience Virtualization Service
+    ("PeerDistSvc", "Disabled"),                              # BranchCache to cache network content from peers in local subnet
+    ("lfsvc", "Disabled"),                                    # Gelocation service
+    ("HvHost", "Disabled"),                                   # Hyper-V Virtual Machine Management
+    ("vmickvpexchange", "Disabled"),                          # Hyper-V related
+    ("vmicguestinterface", "Disabled"),                       # Hyper-V related
+    ("vmicshutdown", "Disabled"),                             # Hyper-V related
+    ("vmicheartbeat", "Disabled"),                            # Hyper-V related
+    ("vmicvmsession", "Disabled"),                            # Hyper-V related
+    ("vmicrdv", "Disabled"),                                  # Hyper-V related
+    ("vmictimesync", "Disabled"),                             # Hyper-V related
+    ("vmicvss", "Disabled"),                                  # Hyper-V related
+    ("irmon", "Disabled"),                                    # Infrared monitor
+    ("SharedAccess", "Disabled"),                             # Internet connection sharing
+    ("SmsRouter", "Disabled"),                                # Microsoft Windows SMS Router Service
+    ("CscService", "Disabled"),                               # Secure Connect Windows Service. Synchronizes network files for offline use
+    ("SEMgrSvc", "Disabled"),                                 # Payments and NFC/SE Manager
+    ("PhoneSvc", "Disabled"),                                 # Phone service
+    ("RpcLocator", "Disabled"),                               # Remote Procedure Call Locator
+    ("RetailDemo", "Disabled"),                               # Retail demo service
+    ("SensorDataService", "Disabled"),                        # Sensor data service
+    ("SensrSvc", "Disabled"),                                 # Sensor monitoring service
+    ("SensorService", "Disabled"),                            # Sensor service
+    ("ScDeviceEnum", "Disabled"),                             # Smart Card Device Enumeration Service
+    ("SCPolicySvc", "Disabled"),                              # Smart Card Removal Policy
+    ("SNMPTRAP", "Disabled"),                                 # SNMP Trap
+    ("WFDSConSvc", "Disabled"),                               # Wi-Fi Direct Services Connection Manager Service
+    ("FrameServer", "Disabled"),                              # Windows Camera Frame Server
+    ("wisvc", "Disabled"),                                    # Windows Insider Service
+    ("icssvc", "Disabled"),                                   # Windows Mobile Hotspot Service
+    ("WwanSvc", "Disabled"),                                  # WWAN AutoConfig
+    ("RemoteAccess", "Disabled"),                             # Routing and Remote Access
+    ("XblAuthManager", "Disabled"),                           # Xbox Live Auth Manager
+    ("XblGameSave", "Disabled"),                              # Xbox Live Game Save Service
+    ("XboxNetApiSvc", "Disabled")                             # Xbox Live Networking Service
+)
 
 ##########
 # Privacy Tweaks
@@ -1016,6 +1082,22 @@ Function DisableFastStartup {
 Function EnableFastStartup {
 	Write-Output "Enabling Fast Startup..."
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power" -Name "HiberbootEnabled" -Type DWord -Value 1
+}
+
+# Disable extra services
+Function DisableExtraServices {
+    Write-Host "Disabling extra services..."
+
+    foreach ($service in $services) {
+        if (Get-Service $service[0] -ErrorAction SilentlyContinue)
+        {
+            Write-Host "Stopping and disabling $service[0]"
+            Stop-Service -Name $service[0]
+            Get-Service -Name $service[0] | Set-Service -StartupType $service[1]
+        } else {
+            Write-Host "Skipping $service[0] (does not exist)"
+        }
+    }
 }
 
 
