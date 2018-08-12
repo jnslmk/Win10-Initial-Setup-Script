@@ -2250,7 +2250,7 @@ Function SetPaintNetAsDefaultEditor {
 	If (!(Test-Path "HKCR:")) {
 		New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
 	}
-    Set-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit\command" -name '(Default)' -Value '�C:\Program Files\Paint.NET\PaintDotNet.exe� �%1�'
+    Set-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit\command" -name '(Default)' -Value '"C:\Program Files\Paint.NET\PaintDotNet.exe" "%1"'
 }
 
 # Set paint as default image editor
@@ -2259,7 +2259,7 @@ Function SetPaintAsDefaultEditor {
 	If (!(Test-Path "HKCR:")) {
 		New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
 	}
-    Set-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit\command" -name '(Default)' -Value '�%systemroot%\system32\mspaint.exe� �%1�'
+    Set-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit\command" -name '(Default)' -Value '"%systemroot%\system32\mspaint.exe" "%1"'
 }
 
 
