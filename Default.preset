@@ -254,6 +254,9 @@ RemoveFaxPrinter                # AddFaxPrinter
 # UnpinStartMenuTiles
 # UnpinTaskbarIcons
 
+### Package installation ###
+"InstallChocolatey"
+
 ### Auxiliary Functions ###
 WaitForKey
 Restart

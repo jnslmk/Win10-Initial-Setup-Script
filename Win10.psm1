@@ -4089,7 +4089,24 @@ Function UnpinTaskbarIcons {
 #endregion Unpinning
 ##########
 
+##########
+#region Package installation
+##########
 
+# Install chocolatey package manager and packages specified by packages.config
+Function InstallChocolatey {
+    Write-Host "Installing chocolatey..."
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    Write-Host "Installing chocolatey packages..."
+    choco feature enable -n allowGlobalConfirmation
+    $scriptDirectory = Split-Path $script:MyInvocation.MyCommand.Path
+    $packageConfigPath = Join-Path $scriptDirectory "packages.config"
+    choco install $packageConfigPath
+}
+
+##########
+#endregion Package installation
+##########
 
 ##########
 #region Auxiliary Functions
