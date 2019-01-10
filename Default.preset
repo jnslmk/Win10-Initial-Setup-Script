@@ -255,7 +255,7 @@ RemoveFaxPrinter                # AddFaxPrinter
 # UnpinTaskbarIcons
 
 ### Package installation ###
-"InstallChocolatey"
+InstallChocolatey
 DisableStartupPrograms          # EnableStartupPrograms
 
 ### Auxiliary Functions ###
