@@ -256,6 +256,7 @@ RemoveFaxPrinter                # AddFaxPrinter
 
 ### Package installation ###
 "InstallChocolatey"
+DisableStartupPrograms          # EnableStartupPrograms
 
 ### Auxiliary Functions ###
 WaitForKey

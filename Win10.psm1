@@ -4109,6 +4109,78 @@ Function InstallChocolatey {
 ##########
 
 ##########
+#region Startup
+##########
+
+# Existing startup entries to disable
+$startupProgramsToDisable = @(
+    "Google Update",
+    "OneDrive",
+    "Skype",
+    "Spotify",
+    "Spotify Web Helper",
+    # "f.lux",
+    "Outllok Google Calendar Sync",
+    # "KeePass Password Safe 2",
+    "VoipConnect",
+    "Steam",
+    "XboxStat",
+    "AdobeAAMUpdater-1.0"
+    # "Everything"
+)
+
+# Existing startup entries to enable
+$startupProgramsToEnable = @(
+    # "Google Update",
+    # "OneDrive",
+    # "Skype",
+    # "Spotify",
+    # "Spotify Web Helper",
+    "f.lux",
+    # "Outllok Google Calendar Sync",
+    "KeePass Password Safe 2",
+    # "VoipConnect",
+    # "Steam",
+    # "XboxStat",
+    # "AdobeAAMUpdater-1.0",
+    "Everything"
+)
+
+# Disable existing startup programs
+Function DisableStartupPrograms {
+    foreach ($program in $startupProgramsToDisable) {
+        If (Test-RegistryValue HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run $program) {
+            Write-Host "Disabling startup of $program in HKCU..."
+            Set-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name $program -Value ([byte[]](0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
+        }
+        
+        If (Test-RegistryValue HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run $program) {
+            Write-Host "Disabling startup of $program in HKLM..."
+            Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name $program -Value ([byte[]](0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
+        }
+    }
+}
+
+# Enable existing startup programs
+Function EnableStartupPrograms {
+    foreach ($program in $startupProgramsToEnable) {
+        If (Test-RegistryValue HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run $program) {
+            Write-Host "Enabling startup of $program in HKCU..."
+            Set-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name $program -Value ([byte[]](0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
+        }
+        
+        If (Test-RegistryValue HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run $program) {
+            Write-Host "Enabling startup of $program in HKLM..."
+            Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name $program -Value ([byte[]](0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
+        }
+    }
+}
+
+##########
+#endregion Startup
+##########
+
+##########
 #region Auxiliary Functions
 ##########
 
