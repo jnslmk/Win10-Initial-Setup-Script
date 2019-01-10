@@ -4104,6 +4104,24 @@ Function InstallChocolatey {
     choco install $packageConfigPath
 }
 
+# Set paint.net as default image editor
+Function SetPaintNetAsDefaultEditor {
+    Write-Host "Setting paint.net as default image editor..."
+	If (!(Test-Path "HKCR:")) {
+		New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
+	}
+    Set-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit\command" -name '(Default)' -Value '“C:\Program Files\Paint.NET\PaintDotNet.exe” “%1”'
+}
+
+# Set paint as default image editor
+Function SetPaintAsDefaultEditor {
+    Write-Host "Setting paint as default image editor..."
+	If (!(Test-Path "HKCR:")) {
+		New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
+	}
+    Set-ItemProperty -Path "HKCR:\SystemFileAssociations\image\shell\edit\command" -name '(Default)' -Value '“%systemroot%\system32\mspaint.exe” “%1”'
+}
+
 ##########
 #endregion Package installation
 ##########

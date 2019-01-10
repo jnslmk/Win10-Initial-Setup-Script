@@ -256,6 +256,7 @@ RemoveFaxPrinter                # AddFaxPrinter
 
 ### Package installation ###
 InstallChocolatey
+SetPaintNetAsDefaultEditor      # SetPaintAsDefaultEditor
 DisableStartupPrograms          # EnableStartupPrograms
 
 ### Auxiliary Functions ###
