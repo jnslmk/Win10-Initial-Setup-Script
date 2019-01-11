@@ -2312,6 +2312,7 @@ Function RemoveESKeyboard {
 	Write-Host "Removing es-ES keyboard..."
 	$langs = Get-WinUserLanguageList
 	Set-WinUserLanguageList ($langs | ? {$_.LanguageTag -ne "es-ES"}) -Force
+}
 
 # Enable NumLock after startup
 Function EnableNumlock {
