@@ -148,9 +148,11 @@ DisableShortcutInName           # EnableShortcutInName
 # HideShortcutArrow             # ShowShortcutArrow
 SetVisualFXPerformance          # SetVisualFXAppearance
 # EnableTitleBarColor           # DisableTitleBarColor
-EnableDarkTheme                 # DisableDarkTheme
+# SetAppsDarkMode               # SetAppsLightMode
+# SetSystemLightMode            # SetSystemDarkMode
 AddENKeyboard                   # RemoveENKeyboard
 AddESKeyboard                   # RemoveESKeyboard
+# DisableEnhPointerPrecision    # EnableEnhPointerPrecision
 EnableNumlock                   # DisableNumlock
 # SetSoundSchemeNone            # SetSoundSchemeDefault
 # DisableStartupSound           # EnableStartupSound
